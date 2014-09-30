@@ -305,6 +305,14 @@
       <Project>{acf20f0e-e932-4951-8bd8-ab15943ee7bc}</Project>
       <Name>Todos.Manager.Task</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Todos.Repository.Memory\Todos.Repository.Memory.csproj">
+      <Project>{5537fcc0-5844-4e20-8325-cbf951c3f99d}</Project>
+      <Name>Todos.Repository.Memory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Todos.Repository.SqlServer\Todos.Repository.SqlServer.csproj">
+      <Project>{0d854438-c10a-4e28-96fa-372e0d0146cc}</Project>
+      <Name>Todos.Repository.SqlServer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Todos\Todos.csproj">
       <Project>{5ccc4d7a-7ba7-412d-9f13-1ef08719a62d}</Project>
       <Name>Todos</Name>

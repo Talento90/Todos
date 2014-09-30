@@ -3,18 +3,15 @@
     <p class="lead">Register your tasks.</p>
 </div>
 
-<div class="row">
-  
-    TODO: FINISH THE CLIEN SIDE :P
-
+<div ng-controller="TaskController" class="row">
 
     <h2>Todos List</h2>
 
     <ul>
-        <li></li>
+        <li ng-repeat="task in Tasks">{{task.Description}}</li>
     </ul>
-
-
-    <input type="text" />
-    <button type="button" class="btn btn-primary">Add</button>
+    <form class="form-inline" role="form">
+        <input type="text" class="form-control" placeholder="Task Description" ng-model="NewTask.Description" />
+        <button ng-click="Events.CrateTask()" type="button" class="btn btn-primary">Create Task</button>
+    </form>
 </div>

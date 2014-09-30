@@ -5,13 +5,38 @@ module Todos {
 
     export class TaskController {
 
-        private tasks: Task[];
-        private taskService: TaskService;
+        private $scope: ITaskScope;
+        private taskService: ITaskService;
 
         public static $inject = ['$scope', 'TaskService'];
 
         constructor($scope: ITaskScope, taskService: ITaskService) {
+            this.$scope = $scope;
+            this.$scope.Events = this;
+            this.taskService = taskService;
+            this.$scope.NewTask = new Task();
 
+            taskService.GetTasks((tasks) => {
+                this.$scope.Tasks = tasks;
+            });
+        }
+
+
+        public CreateTask() {     
+            this.taskService.CreateTask(this.$scope.NewTask, (success: boolean) => {
+                if (success) {
+                    this.$scope.Tasks.push(this.$scope.NewTask);
+                    this.$scope.NewTask = new Task();
+                }
+            });           
+        }
+
+        public DeleteTask(idTask: string) {
+            this.taskService.DeleteTask(idTask, (task: Task) => {
+                if (task) {
+                    this.$scope.Tasks.splice(0, 1, task);                
+                }
+            });
         }
     }
 }

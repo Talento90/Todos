@@ -13,8 +13,19 @@
         }
 
 
-        public GetTasks(callback:void) {
-            this.$http.get("")
+        public GetTasks(callback: Function) {
+            this.$http.get<Task>("http://localhost:6883/api/Task")
+                .success((tasks) => {
+                    callback(tasks);
+                    toastr.success("Get all messages with success.");
+                })
+                .error((error) => {
+                    toastr.error("Error getting the messages!");
+                });
+        }
+
+        public DeleteTask(idTask: string, callback: Function) {
+            this.$http.delete("")
                 .success((tasks) => {
 
                 })
@@ -23,18 +34,8 @@
                 });
         }
 
-        public DeleteTask(idTask: string, callback: void) {
-            this.$http.get("")
-                .success((tasks) => {
-
-                })
-                .error(() => {
-
-                });
-        }
-
-        public CreateTask(task: Task, callback: void) {
-            this.$http.get("")
+        public CreateTask(task: Task, callback: Function) {
+            this.$http.post("", task)
                 .success((tasks) => {
 
                 })

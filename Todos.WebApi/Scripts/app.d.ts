@@ -3,14 +3,18 @@
 declare module Todos {
     interface ITaskScope {
         Events: TaskController;
+        Tasks: Task[];
+        NewTask: Task;
     }
 }
 declare module Todos {
     class TaskController {
-        private tasks;
+        private $scope;
         private taskService;
         static $inject: string[];
         constructor($scope: ITaskScope, taskService: ITaskService);
+        public CreateTask(): void;
+        public DeleteTask(idTask: string): void;
     }
 }
 declare module Todos {
@@ -24,9 +28,9 @@ declare module Todos {
 }
 declare module Todos {
     interface ITaskService {
-        GetTasks(callback: void): any;
-        DeleteTask(idTask: string, callback: void): any;
-        CreateTask(task: Task, callback: void): any;
+        GetTasks(callback: Function): any;
+        DeleteTask(idTask: string, callback: Function): any;
+        CreateTask(task: Task, callback: Function): any;
     }
 }
 declare module Todos {
@@ -35,8 +39,8 @@ declare module Todos {
         public $http: ng.IHttpService;
         static $inject: string[];
         constructor($http: ng.IHttpService);
-        public GetTasks(callback: void): void;
-        public DeleteTask(idTask: string, callback: void): void;
-        public CreateTask(task: Task, callback: void): void;
+        public GetTasks(callback: Function): void;
+        public DeleteTask(idTask: string, callback: Function): void;
+        public CreateTask(task: Task, callback: Function): void;
     }
 }

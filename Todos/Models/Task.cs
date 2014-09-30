@@ -16,7 +16,7 @@ namespace Todos.Models
 
         public Task()
         {
-
+            this.Id = Guid.NewGuid().ToString();
         }
 
     }

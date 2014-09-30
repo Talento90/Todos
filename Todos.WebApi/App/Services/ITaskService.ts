@@ -2,8 +2,8 @@
     'use strict';
 
     export interface ITaskService {
-        GetTasks(callback: void);
-        DeleteTask(idTask: string, callback: void);
-        CreateTask(task: Task, callback: void);
+        GetTasks(callback: Function);
+        DeleteTask(idTask: string, callback: Function);
+        CreateTask(task: Task, callback: Function);
     }
 }

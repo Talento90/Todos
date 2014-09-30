@@ -4,8 +4,8 @@ module Todos {
     'use strict';
 
     export interface ITaskScope {
-
         Events: TaskController;
-
+        Tasks: Array<Task>;
+        NewTask: Task;
     }
 }
