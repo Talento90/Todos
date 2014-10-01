@@ -4,5 +4,4 @@
   var todos =  angular.module('todos', [])
                 .controller('TaskController', TaskController)
                 .service('TaskService', TaskService);
-
 }
