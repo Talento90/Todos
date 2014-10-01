@@ -23,6 +23,9 @@ module Todos {
 
 
         public CreateTask() {     
+
+            console.log(this.$scope.NewTask);
+
             this.taskService.CreateTask(this.$scope.NewTask, (success: boolean) => {
                 if (success) {
                     this.$scope.Tasks.push(this.$scope.NewTask);

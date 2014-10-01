@@ -1,4 +1,11 @@
 ﻿declare module Todos {
+    class Task {
+        public Id: string;
+        public Description: string;
+        public Completed: boolean;
+        public Created: Date;
+        public Updated: Date;
+    }
 }
 declare module Todos {
     interface ITaskScope {
@@ -18,15 +25,6 @@ declare module Todos {
     }
 }
 declare module Todos {
-    class Task {
-        public Id: string;
-        public Description: string;
-        public Completed: boolean;
-        public Created: Date;
-        public Updated: Date;
-    }
-}
-declare module Todos {
     interface ITaskService {
         GetTasks(callback: Function): any;
         DeleteTask(idTask: string, callback: Function): any;
@@ -43,4 +41,6 @@ declare module Todos {
         public DeleteTask(idTask: string, callback: Function): void;
         public CreateTask(task: Task, callback: Function): void;
     }
+}
+declare module Todos {
 }

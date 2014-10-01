@@ -1,4 +1,6 @@
-﻿module Todos {
+﻿/// <reference path='../Refs.ts' />
+
+module Todos {
     'use strict';
 
     export class TaskService implements ITaskService {

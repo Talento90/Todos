@@ -1,7 +1,10 @@
-﻿module Todos {
+﻿/// <reference path='./Refs.ts' />
+
+module Todos {
     'use strict';
 
   var todos =  angular.module('todos', [])
                 .controller('TaskController', TaskController)
                 .service('TaskService', TaskService);
+
 }

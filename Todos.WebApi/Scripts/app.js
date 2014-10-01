@@ -2,10 +2,13 @@
 (function (Todos) {
     'use strict';
 
-    var todos = angular.module('todos', []).controller('TaskController', Todos.TaskController).service('TaskService', Todos.TaskService);
+    var Task = (function () {
+        function Task() {
+        }
+        return Task;
+    })();
+    Todos.Task = Task;
 })(Todos || (Todos = {}));
-/// <reference path='../Scripts/typings/angularjs/angular.d.ts' />
-/// <reference path='../Scripts/typings/toastr/toastr.d.ts' />
 /// <reference path='../Refs.ts' />
 var Todos;
 (function (Todos) {
@@ -30,6 +33,8 @@ var Todos;
         }
         TaskController.prototype.CreateTask = function () {
             var _this = this;
+            console.log(this.$scope.NewTask);
+
             this.taskService.CreateTask(this.$scope.NewTask, function (success) {
                 if (success) {
                     _this.$scope.Tasks.push(_this.$scope.NewTask);
@@ -51,21 +56,12 @@ var Todos;
     })();
     Todos.TaskController = TaskController;
 })(Todos || (Todos = {}));
-var Todos;
-(function (Todos) {
-    'use strict';
-
-    var Task = (function () {
-        function Task() {
-        }
-        return Task;
-    })();
-    Todos.Task = Task;
-})(Todos || (Todos = {}));
+/// <reference path='../Refs.ts' />
 var Todos;
 (function (Todos) {
     'use strict';
 })(Todos || (Todos = {}));
+/// <reference path='../Refs.ts' />
 var Todos;
 (function (Todos) {
     'use strict';
@@ -98,5 +94,20 @@ var Todos;
         return TaskService;
     })();
     Todos.TaskService = TaskService;
+})(Todos || (Todos = {}));
+/// <reference path='../Scripts/typings/angularjs/angular.d.ts' />
+/// <reference path='../Scripts/typings/toastr/toastr.d.ts' />
+/// <reference path='Models/Task.ts' />
+/// <reference path='Controllers/ITaskScope.ts' />
+/// <reference path='Controllers/TaskController.ts' />
+/// <reference path='Services/ITaskService.ts' />
+/// <reference path='Services/TaskService.ts' />
+/// <reference path='App.ts' />
+/// <reference path='./Refs.ts' />
+var Todos;
+(function (Todos) {
+    'use strict';
+
+    var todos = angular.module('todos', []).controller('TaskController', Todos.TaskController).service('TaskService', Todos.TaskService);
 })(Todos || (Todos = {}));
 //# sourceMappingURL=app.js.map
