@@ -8,10 +8,10 @@
     <h2>Todos List</h2>
 
     <ul>
-        <li ng-repeat="task in Tasks">{{task.Description}}</li>
+        <li ng-repeat="task in Tasks">{{task.Description}} <i ng-click="Events.DeleteTask(task.Id)" class="glyphicon glyphicon-remove option"></i></li>
     </ul>
     <form class="form-inline" role="form">
-        <input type="text" class="form-control" placeholder="Task Description" ng-model="NewTask.Description" />
+        <input type="text" class="form-control" placeholder="Task Description" ng-model="NewTask" />
         <button ng-click="Events.CreateTask()" type="button" class="btn btn-primary">Create Task</button>
     </form>
 </div>

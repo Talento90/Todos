@@ -5,13 +5,14 @@
         public Completed: boolean;
         public Created: Date;
         public Updated: Date;
+        constructor(description: string);
     }
 }
 declare module Todos {
     interface ITaskScope {
         Events: TaskController;
         Tasks: Task[];
-        NewTask: Task;
+        NewTask: string;
     }
 }
 declare module Todos {
@@ -33,6 +34,7 @@ declare module Todos {
 }
 declare module Todos {
     class TaskService implements ITaskService {
+        private serviceUrl;
         private tasks;
         public $http: ng.IHttpService;
         static $inject: string[];

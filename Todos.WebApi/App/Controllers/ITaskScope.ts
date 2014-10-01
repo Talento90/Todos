@@ -6,6 +6,6 @@ module Todos {
     export interface ITaskScope {
         Events: TaskController;
         Tasks: Array<Task>;
-        NewTask: Task;
+        NewTask: string;
     }
 }

@@ -3,7 +3,8 @@
     'use strict';
 
     var Task = (function () {
-        function Task() {
+        function Task(description) {
+            this.Description = description;
         }
         return Task;
     })();
@@ -25,7 +26,7 @@ var Todos;
             this.$scope = $scope;
             this.$scope.Events = this;
             this.taskService = taskService;
-            this.$scope.NewTask = new Todos.Task();
+            this.$scope.NewTask = "";
 
             taskService.GetTasks(function (tasks) {
                 _this.$scope.Tasks = tasks;
@@ -33,12 +34,12 @@ var Todos;
         }
         TaskController.prototype.CreateTask = function () {
             var _this = this;
-            console.log(this.$scope.NewTask);
+            var newTask = new Todos.Task(this.$scope.NewTask);
 
-            this.taskService.CreateTask(this.$scope.NewTask, function (success) {
-                if (success) {
-                    _this.$scope.Tasks.push(_this.$scope.NewTask);
-                    _this.$scope.NewTask = new Todos.Task();
+            this.taskService.CreateTask(newTask, function (task) {
+                if (task) {
+                    _this.$scope.Tasks.push(task);
+                    _this.$scope.NewTask = "";
                 }
             });
         };
@@ -47,7 +48,10 @@ var Todos;
             var _this = this;
             this.taskService.DeleteTask(idTask, function (task) {
                 if (task) {
-                    _this.$scope.Tasks.splice(0, 1, task);
+                    var t = _this.$scope.Tasks.filter(function (t) {
+                        return t.Id == idTask;
+                    })[0];
+                    _this.$scope.Tasks.splice(_this.$scope.Tasks.indexOf(t), 1);
                 }
             });
         };
@@ -68,26 +72,35 @@ var Todos;
 
     var TaskService = (function () {
         function TaskService($http) {
+            this.serviceUrl = "http://localhost:6883/api/Task";
             this.$http = $http;
         }
         TaskService.prototype.GetTasks = function (callback) {
-            this.$http.get("http://localhost:6883/api/Task").success(function (tasks) {
-                callback(tasks);
+            this.$http.get(this.serviceUrl).success(function (tasks) {
                 toastr.success("Get all messages with success.");
+                callback(tasks);
             }).error(function (error) {
                 toastr.error("Error getting the messages!");
             });
         };
 
         TaskService.prototype.DeleteTask = function (idTask, callback) {
-            this.$http.delete("").success(function (tasks) {
+            this.$http.delete(this.serviceUrl + "/" + idTask).success(function (task) {
+                toastr.success("Task deleted with success!");
+                callback(task);
             }).error(function () {
+                toastr.error("Error trying to delete a task!");
+                callback(null);
             });
         };
 
         TaskService.prototype.CreateTask = function (task, callback) {
-            this.$http.post("", task).success(function (tasks) {
+            this.$http.post(this.serviceUrl, task).success(function (task) {
+                toastr.success("Task created with success!");
+                callback(task);
             }).error(function () {
+                toastr.error("Error trying to create a task!");
+                callback(null);
             });
         };
         TaskService.$inject = ['$http'];
@@ -107,6 +120,8 @@ var Todos;
 var Todos;
 (function (Todos) {
     'use strict';
+
+    toastr.options.backgroundpositionClass = "toast-top-full-width";
 
     var todos = angular.module('todos', []).controller('TaskController', Todos.TaskController).service('TaskService', Todos.TaskService);
 })(Todos || (Todos = {}));

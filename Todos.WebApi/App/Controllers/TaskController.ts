@@ -14,9 +14,9 @@ module Todos {
             this.$scope = $scope;
             this.$scope.Events = this;
             this.taskService = taskService;
-            this.$scope.NewTask = new Task();
+            this.$scope.NewTask = "";
 
-            taskService.GetTasks((tasks) => {
+            taskService.GetTasks((tasks: Task []) => {
                 this.$scope.Tasks = tasks;
             });
         }
@@ -24,20 +24,21 @@ module Todos {
 
         public CreateTask() {     
 
-            console.log(this.$scope.NewTask);
-
-            this.taskService.CreateTask(this.$scope.NewTask, (success: boolean) => {
-                if (success) {
-                    this.$scope.Tasks.push(this.$scope.NewTask);
-                    this.$scope.NewTask = new Task();
+            var newTask: Task = new Task(this.$scope.NewTask);
+ 
+            this.taskService.CreateTask(newTask, (task: Task) => {
+                if (task) {
+                    this.$scope.Tasks.push(task);
+                    this.$scope.NewTask = "";
                 }
             });           
         }
 
         public DeleteTask(idTask: string) {
             this.taskService.DeleteTask(idTask, (task: Task) => {
-                if (task) {
-                    this.$scope.Tasks.splice(0, 1, task);                
+                if (task) {                                  
+                    var t: Task = this.$scope.Tasks.filter(t => t.Id == idTask)[0];
+                    this.$scope.Tasks.splice(this.$scope.Tasks.indexOf(t), 1);
                 }
             });
         }

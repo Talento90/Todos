@@ -7,6 +7,10 @@
         public Completed: boolean;
         public Created: Date;
         public Updated: Date;
+
+        constructor(description: string) {
+            this.Description = description;
+        }
     }
 
 } 

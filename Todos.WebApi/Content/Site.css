@@ -15,3 +15,8 @@ select,
 textarea {
     max-width: 280px;
 }
+
+
+.option {
+    cursor: pointer;
+}
