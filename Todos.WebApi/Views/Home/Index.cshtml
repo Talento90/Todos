@@ -1,15 +1,12 @@
-﻿<div class="jumbotron">
+﻿<div ng-controller="TaskController" class="jumbotron text-center">
     <h1>Todos</h1>
-    <p class="lead">Register your tasks.</p>
-</div>
 
-<div ng-controller="TaskController" class="row">
-
-    <h2>Todos List</h2>
-
-    <ul>
-        <li ng-repeat="task in Tasks">{{task.Description}} <i ng-click="Events.DeleteTask(task.Id)" class="glyphicon glyphicon-remove option"></i></li>
+    <ul class="list-unstyled">
+        <li ng-class="task.Completed ? 'completed' : ''" ng-repeat="task in Tasks">{{task.Description}} <input ng-click="Events.CheckTask(task)" class="completed" type="checkbox" ng-model="task.Completed" /> <i ng-click="Events.DeleteTask(task.Id)" class="glyphicon glyphicon-remove option"></i></li>
     </ul>
+
+    <hr />
+    
     <form class="form-inline" role="form">
         <input type="text" class="form-control" placeholder="Task Description" ng-model="NewTask" />
         <button ng-click="Events.CreateTask()" type="button" class="btn btn-primary">Create Task</button>

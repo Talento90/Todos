@@ -42,5 +42,11 @@ module Todos {
                 }
             });
         }
+
+        public CheckTask(task: Task) {
+            this.taskService.UpdateTask(task, (task: Task) => {
+                
+            });
+        }
     }
 }

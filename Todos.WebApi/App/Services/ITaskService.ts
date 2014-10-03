@@ -7,5 +7,6 @@ module Todos {
         GetTasks(callback: Function);
         DeleteTask(idTask: string, callback: Function);
         CreateTask(task: Task, callback: Function);
+        UpdateTask(task: Task, callback: Function);
     }
 }

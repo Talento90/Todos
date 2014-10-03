@@ -23,6 +23,7 @@ declare module Todos {
         constructor($scope: ITaskScope, taskService: ITaskService);
         public CreateTask(): void;
         public DeleteTask(idTask: string): void;
+        public CheckTask(task: Task): void;
     }
 }
 declare module Todos {
@@ -30,6 +31,7 @@ declare module Todos {
         GetTasks(callback: Function): any;
         DeleteTask(idTask: string, callback: Function): any;
         CreateTask(task: Task, callback: Function): any;
+        UpdateTask(task: Task, callback: Function): any;
     }
 }
 declare module Todos {
@@ -42,6 +44,7 @@ declare module Todos {
         public GetTasks(callback: Function): void;
         public DeleteTask(idTask: string, callback: Function): void;
         public CreateTask(task: Task, callback: Function): void;
+        public UpdateTask(task: Task, callback: Function): void;
     }
 }
 declare module Todos {

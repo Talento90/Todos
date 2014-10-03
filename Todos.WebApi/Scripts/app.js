@@ -55,6 +55,11 @@ var Todos;
                 }
             });
         };
+
+        TaskController.prototype.CheckTask = function (task) {
+            this.taskService.UpdateTask(task, function (task) {
+            });
+        };
         TaskController.$inject = ['$scope', 'TaskService'];
         return TaskController;
     })();
@@ -100,6 +105,16 @@ var Todos;
                 callback(task);
             }).error(function () {
                 toastr.error("Error trying to create a task!");
+                callback(null);
+            });
+        };
+
+        TaskService.prototype.UpdateTask = function (task, callback) {
+            this.$http.put(this.serviceUrl + "/" + task.Id, task).success(function (task) {
+                toastr.success("Task updated with success!");
+                callback(task);
+            }).error(function () {
+                toastr.error("Error trying to update a task!");
                 callback(null);
             });
         };

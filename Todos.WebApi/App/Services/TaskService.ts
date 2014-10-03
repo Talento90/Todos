@@ -49,5 +49,17 @@ module Todos {
                     callback(null);
                 });
         }
+
+        public UpdateTask(task: Task, callback: Function) {
+            this.$http.put(this.serviceUrl + "/" + task.Id , task)
+                .success((task) => {
+                    toastr.success("Task updated with success!");
+                    callback(task);
+                })
+                .error(() => {
+                    toastr.error("Error trying to update a task!");
+                    callback(null);
+                });
+        }
     }
 }
