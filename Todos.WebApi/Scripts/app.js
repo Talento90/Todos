@@ -57,8 +57,8 @@ var Todos;
         };
 
         TaskController.prototype.CheckTask = function (task) {
-            this.taskService.UpdateTask(task, function (task) {
-            });
+            task.Completed = !task.Completed;
+            this.taskService.UpdateTask(task, null);
         };
         TaskController.$inject = ['$scope', 'TaskService'];
         return TaskController;
@@ -112,10 +112,12 @@ var Todos;
         TaskService.prototype.UpdateTask = function (task, callback) {
             this.$http.put(this.serviceUrl + "/" + task.Id, task).success(function (task) {
                 toastr.success("Task updated with success!");
-                callback(task);
+                if (callback)
+                    callback(task);
             }).error(function () {
                 toastr.error("Error trying to update a task!");
-                callback(null);
+                if (callback)
+                    callback(null);
             });
         };
         TaskService.$inject = ['$http'];

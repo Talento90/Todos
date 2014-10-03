@@ -54,11 +54,13 @@ module Todos {
             this.$http.put(this.serviceUrl + "/" + task.Id , task)
                 .success((task) => {
                     toastr.success("Task updated with success!");
-                    callback(task);
+                    if(callback)
+                        callback(task);
                 })
                 .error(() => {
                     toastr.error("Error trying to update a task!");
-                    callback(null);
+                    if (callback)
+                        callback(null);
                 });
         }
     }
